@@ -98,20 +98,17 @@ function hacerPedido() {
     mensaje += `\n💰 TOTAL: $${total}`;
 
     const enlaceMessenger = "https://www.facebook.com/messages/t/61582641410669/";
-    const ventanaMessenger = window.open("about:blank", "_blank");
+    const ventanaMessenger = window.open(enlaceMessenger, "_blank");
 
     copiarMensaje(mensaje)
         .then(() => {
-            if (ventanaMessenger) {
-                ventanaMessenger.location.href = enlaceMessenger;
-            } else {
+            if (!ventanaMessenger) {
                 window.location.assign(enlaceMessenger);
             }
             alert("El pedido se copió. Pégalo en el chat de Messenger.");
         })
         .catch(() => {
             if (ventanaMessenger) {
-                ventanaMessenger.location.href = enlaceMessenger;
                 alert("Messenger se abrió, pero copia el pedido manualmente:\n\n" + mensaje);
             } else {
                 window.location.assign(enlaceMessenger);
