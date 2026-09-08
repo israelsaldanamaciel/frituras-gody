@@ -39,8 +39,8 @@ header {
 }
 
 .logo {
-    width: min(320px, 86vw);
-    max-height: 210px;
+    width: min(450px, 90vw);
+    max-height: 250px;
     object-fit: contain;
     display: block;
     margin: 0 auto 12px;
