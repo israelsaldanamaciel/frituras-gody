@@ -91,6 +91,14 @@ function hacerPedido() {
 
     mensaje += `\n💰 TOTAL: $${total}`;
 
+    if (navigator.share) {
+        navigator.share({
+            title: "Pedido de Frituras Gody",
+            text: mensaje
+        }).catch(() => {});
+        return;
+    }
+
     const enlaceMessenger = "https://m.me/61582641410669";
     const ventanaMessenger = window.open(enlaceMessenger, "_blank");
 
