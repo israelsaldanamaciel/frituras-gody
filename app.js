@@ -91,16 +91,12 @@ function hacerPedido() {
 
     mensaje += `\n💰 TOTAL: $${total}`;
 
-    if (navigator.share) {
-        navigator.share({
-            title: "Pedido de Frituras Gody",
-            text: mensaje
-        }).catch(() => {});
-        return;
-    }
+    const enlaceMessenger = "https://www.facebook.com/messages/t/61582641410669/";
+    const ventanaMessenger = window.open(enlaceMessenger, "_blank", "noopener,noreferrer");
 
-    const enlaceMessenger = "https://m.me/61582641410669";
-    const ventanaMessenger = window.open(enlaceMessenger, "_blank");
+    if (!ventanaMessenger) {
+        window.location.assign(enlaceMessenger);
+    }
 
     copiarMensaje(mensaje)
         .then(() => {
