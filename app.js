@@ -47,6 +47,36 @@ function eliminarProducto(index) {
     actualizarCarrito();
 }
 
+function copiarMensaje(mensaje) {
+    if (navigator.clipboard && window.isSecureContext) {
+        return navigator.clipboard.writeText(mensaje);
+    }
+
+    return new Promise((resolve, reject) => {
+        const campoTemporal = document.createElement("textarea");
+        campoTemporal.value = mensaje;
+        campoTemporal.setAttribute("readonly", "");
+        campoTemporal.style.position = "fixed";
+        campoTemporal.style.opacity = "0";
+        document.body.appendChild(campoTemporal);
+        campoTemporal.select();
+
+        try {
+            const copiado = document.execCommand("copy");
+            document.body.removeChild(campoTemporal);
+
+            if (copiado) {
+                resolve();
+            } else {
+                reject(new Error("No se pudo copiar el pedido"));
+            }
+        } catch (error) {
+            document.body.removeChild(campoTemporal);
+            reject(error);
+        }
+    });
+}
+
 function hacerPedido() {
     if (pedido.length === 0) {
         alert("Primero agrega algún producto al pedido.");
@@ -61,14 +91,18 @@ function hacerPedido() {
 
     mensaje += `\n💰 TOTAL: $${total}`;
 
-    const enlaceMessenger = "https://www.facebook.com/messages/t/61582641410669/";
+    const enlaceMessenger = "https://m.me/61582641410669";
+    const ventanaMessenger = window.open(enlaceMessenger, "_blank");
 
-    navigator.clipboard.writeText(mensaje)
+    copiarMensaje(mensaje)
         .then(() => {
             alert("El pedido se copió. Pégalo en el chat de Messenger.");
-            window.open(enlaceMessenger, "_blank");
         })
         .catch(() => {
-            window.open(enlaceMessenger, "_blank");
+            if (ventanaMessenger) {
+                alert("Messenger se abrió, pero copia el pedido manualmente:\n\n" + mensaje);
+            } else {
+                alert("El navegador bloqueó Messenger. Permite las ventanas emergentes y copia este pedido:\n\n" + mensaje);
+            }
         });
 }
