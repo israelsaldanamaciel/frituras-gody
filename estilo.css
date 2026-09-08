@@ -57,6 +57,30 @@ button {
     margin: 0 auto 15px;
     background: transparent;
     will-change: transform;
+    animation: flotar 4.5s ease-in-out infinite;
+}
+
+.producto:nth-of-type(2) img {
+    animation-delay: -1.5s;
+}
+
+.producto:nth-of-type(3) img {
+    animation-delay: -3s;
+}
+
+@keyframes flotar {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .producto img {
+        animation: none;
+    }
 }
 #carrito {
     background-color: white;

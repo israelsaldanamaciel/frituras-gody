@@ -1,35 +1,5 @@
 let pedido = [];
 let total = 0;
-let movimientoProgramado = false;
-
-function moverImagenesConScroll() {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        return;
-    }
-
-    if (movimientoProgramado) {
-        return;
-    }
-
-    movimientoProgramado = true;
-    window.requestAnimationFrame(() => {
-        const imagenes = document.querySelectorAll(".producto img");
-        const centroVentana = window.innerHeight / 2;
-
-        imagenes.forEach((imagen) => {
-            const distanciaAlCentro = imagen.getBoundingClientRect().top + (imagen.offsetHeight / 2) - centroVentana;
-            const desplazamiento = Math.max(-14, Math.min(14, distanciaAlCentro * -0.04));
-
-            imagen.style.transform = `translateY(${desplazamiento}px)`;
-        });
-
-        movimientoProgramado = false;
-    });
-}
-
-window.addEventListener("scroll", moverImagenesConScroll, { passive: true });
-window.addEventListener("resize", moverImagenesConScroll);
-window.addEventListener("load", moverImagenesConScroll);
 
 function verProductos() {
     document.getElementById("productos").scrollIntoView({
