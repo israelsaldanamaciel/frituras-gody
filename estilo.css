@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap');
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Nunito', sans-serif;
     margin: 0;
     min-height: 100vh;
     background-color: #fff4df;
@@ -9,6 +11,27 @@ body {
         linear-gradient(135deg, #fff8ed 0%, #ffe9c7 48%, #fff4df 100%);
     background-attachment: fixed;
     text-align: center;
+}
+
+h1,
+h2,
+h3,
+strong,
+button {
+    font-family: 'Fredoka', sans-serif;
+}
+
+h1 {
+    font-size: clamp(2rem, 7vw, 3.2rem);
+    letter-spacing: 0.5px;
+}
+
+h2 {
+    color: #9f3f1e;
+}
+
+h3 {
+    color: #783b1b;
 }
 
 header {
@@ -24,6 +47,7 @@ main {
 button {
     padding: 15px 25px;
     font-size: 18px;
+    font-weight: 600;
     border: none;
     border-radius: 10px;
     cursor: pointer;
