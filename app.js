@@ -83,6 +83,27 @@ function copiarMensajeConRespaldo(mensaje) {
     });
 }
 
+function copiarMensajeSincrono(mensaje) {
+    const campoTemporal = document.createElement("textarea");
+    campoTemporal.value = mensaje;
+    campoTemporal.setAttribute("readonly", "");
+    campoTemporal.style.position = "fixed";
+    campoTemporal.style.opacity = "0";
+    document.body.appendChild(campoTemporal);
+    campoTemporal.focus();
+    campoTemporal.select();
+
+    let copiado = false;
+
+    try {
+        copiado = document.execCommand("copy");
+    } finally {
+        document.body.removeChild(campoTemporal);
+    }
+
+    return copiado;
+}
+
 function hacerPedido() {
     if (pedido.length === 0) {
         alert("Primero agrega algún producto al pedido.");
@@ -98,21 +119,6 @@ function hacerPedido() {
     mensaje += `\n💰 TOTAL: $${total}`;
 
     const enlaceMessenger = "https://www.facebook.com/messages/t/61582641410669/";
-    const ventanaMessenger = window.open(enlaceMessenger, "_blank");
-
-    copiarMensaje(mensaje)
-        .then(() => {
-            if (!ventanaMessenger) {
-                window.location.assign(enlaceMessenger);
-            }
-            alert("El pedido se copió. Pégalo en el chat de Messenger.");
-        })
-        .catch(() => {
-            if (ventanaMessenger) {
-                alert("Messenger se abrió, pero copia el pedido manualmente:\n\n" + mensaje);
-            } else {
-                window.location.assign(enlaceMessenger);
-                alert("El navegador bloqueó Messenger. Permite las ventanas emergentes y copia este pedido:\n\n" + mensaje);
-            }
-        });
+    copiarMensajeSincrono(mensaje);
+    window.location.assign(enlaceMessenger);
 }
