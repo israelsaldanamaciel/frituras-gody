@@ -118,7 +118,7 @@ function hacerPedido() {
 
     mensaje += `\n💰 TOTAL: $${total}`;
 
-    const enlaceMessenger = "https://www.facebook.com/messages/t/61582641410669/";
+    const enlaceMessenger = "https://m.me/61582641410669";
     copiarMensajeSincrono(mensaje);
     window.location.assign(enlaceMessenger);
 }
