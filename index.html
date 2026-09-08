@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frituras Gody</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+
+<body>
+    <header>
+        <h1>🛍️ Frituras Gody</h1>
+        <p>Catálogo y pedidos</p>
+    </header>
+
+    <main>
+        <h2>¡Bienvenido!</h2>
+        <p>Conoce nuestros productos y realiza tu pedido.</p>
+
+        <button onclick="verProductos()">Ver productos</button>
+
+        <section id="productos">
+            <h2>🛍️ Nuestros productos</h2>
+
+            <div class="producto">
+                <img src="cachute macho.jpeg" alt="Producto 1">
+
+                <h3>Cacahute macho</h3>
+                <p>!El mejor sabor¡</p>
+                <strong>$80</strong><br><br>
+
+                <button onclick="agregarProducto('Producto 1', 50)">
+                    Agregar al pedido
+                </button>
+            </div>
+
+            <div class="producto">
+                <img src="bitanas mixtas.jpeg" alt="Producto 2">
+
+                <h3>Botanas Mixtas</h3>
+                <p>Descripción del producto</p>
+                <strong>Mix Habas 900gr $80 </strong><br><br>
+                <strong>Mix Cacahuet 450gr $45</strong>
+                <button onclick="agregarProducto('mix Habas, Mix Cacahute', 70)">
+                    Agregar al pedido
+                </button>
+            </div>
+
+            <div class="producto">
+                <img src="Dorikis queso.jpeg" alt="Producto 3">
+
+                <h3>Dorikis Queso</h3>
+                <p>¡Delicioso sabor!</p>
+                <strong>$55</strong><br><br>
+
+                <button onclick="agregarProducto('Dorikis Queso', 60)">
+                    Agregar al carrito
+                </button>
+            </div>
+        </section>
+
+        <section id="carrito">
+            <h2>🛒 Mi carrito</h2>
+
+            <div id="listaPedido">
+                <p>No has agregado productos todavía.</p>
+            </div>
+
+            <h3>Total: $<span id="total">0</span></h3>
+
+            <button onclick="hacerPedido()">📲 Hacer pedido</button>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
