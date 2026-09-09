@@ -4,13 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Frituras Gody</title>
+    <meta name="theme-color" content="#d92828">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Frituras Gody">
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="apple-touch-icon" href="logo de frituras gody.png">
     <link rel="stylesheet" href="estilo.css">
 </head>
 
 <body>
+    <div id="portadaCarga" aria-label="Cargando Frituras Gody">
+        <img src="Presentacicon.jpeg" alt="Frituras Gody">
+    </div>
+
     <header>
-        <img class="logo" src="logo de frituras gody.png" alt="Logo de Frituras Gody">
-        <h1>🛍️ Frituras Gody</h1>
+        <div class="marca-header">
+            <img class="logo" src="logo de frituras gody.png" alt="Logo de Frituras Gody">
+            <button id="instalarApp" type="button">📥 Descargar APK</button>
+        </div>
+        <h1>Frituras Gody</h1>
         <p>Catálogo y pedidos</p>
     </header>
 
@@ -89,6 +102,17 @@
                 </button>
             </div>
 
+            <div class="producto">
+                <img src="tostadas el vaquero.jpeg" alt="Tostadas El Vaquero">
+
+                <h3>Tostadas El Vaquero</h3>
+                <p>Crujientes, doraditas y deliciosas.</p>
+
+                <button onclick="agregarProducto('Tostadas El Vaquero', 25)">
+                    Agregar al pedido
+                </button>
+            </div>
+
         </section>
 
         <section id="carrito">
@@ -103,7 +127,12 @@
     </main>
 
     <script src="app.js"></script>
-</body>
-</html>
+    <script>
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", () => {
+                navigator.serviceWorker.register("service-worker.js");
+            });
+        }
+    </script>
 </body>
 </html>

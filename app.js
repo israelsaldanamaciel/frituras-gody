@@ -1,74 +1,72 @@
 let pedido = [];
 let total = 0;
+const botonInstalar = document.getElementById("instalarApp");
 
-function abrirProductosAdicionales() {
-    const nuevaPestana = window.open("", "_blank");
+botonInstalar.addEventListener("click", async () => {
+    botonInstalar.disabled = true;
 
-    if (!nuevaPestana) {
-        alert("Permite las ventanas emergentes para ver estos productos.");
-        return;
+    try {
+        const respuesta = await fetch("Frituras-Gody.apk");
+
+        if (!respuesta.ok) {
+            throw new Error("No se encontró el APK");
+        }
+
+        const archivo = await respuesta.blob();
+        const enlaceDescarga = document.createElement("a");
+        enlaceDescarga.href = URL.createObjectURL(archivo);
+        enlaceDescarga.download = "Frituras-Gody.apk";
+        document.body.appendChild(enlaceDescarga);
+        enlaceDescarga.click();
+        enlaceDescarga.remove();
+        URL.revokeObjectURL(enlaceDescarga.href);
+    } catch (error) {
+        alert("No se pudo descargar el APK. Abre la página con Live Server o HTTPS.");
+    } finally {
+        botonInstalar.disabled = false;
+    }
+});
+
+window.addEventListener("load", () => {
+    window.setTimeout(() => {
+        document.getElementById("portadaCarga").classList.add("oculta");
+    }, 5000);
+});
+
+function abrirImagen(imagen) {
+    const visor = document.createElement("div");
+    const imagenAmpliada = document.createElement("img");
+
+    visor.className = "visor-imagen";
+    visor.setAttribute("role", "dialog");
+    visor.setAttribute("aria-label", "Imagen ampliada");
+    imagenAmpliada.src = imagen.src;
+    imagenAmpliada.alt = imagen.alt;
+
+    visor.appendChild(imagenAmpliada);
+    document.body.appendChild(visor);
+
+    function cerrarImagen() {
+        visor.remove();
+        document.removeEventListener("keydown", cerrarConEscape);
     }
 
-    nuevaPestana.document.write(`
-        <!DOCTYPE html>
-        <html lang="es">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Más productos | Frituras Gody</title>
-            <style>
-                body {
-                    margin: 0;
-                    padding: 32px 18px;
-                    color: #783b1b;
-                    background: linear-gradient(135deg, #fff8ed, #ffe9c7);
-                    font-family: Palatino, "Palatino Linotype", "Book Antiqua", serif;
-                    text-align: center;
-                }
-                h1 { color: #9f3f1e; }
-                .productos-extra {
-                    display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-                    gap: 24px;
-                    max-width: 900px;
-                    margin: 30px auto;
-                }
-                .producto-extra {
-                    padding: 18px;
-                    background: #fff;
-                    border: 3px solid #e6a22d;
-                    border-radius: 16px;
-                    box-shadow: 0 8px 18px rgba(132, 71, 24, 0.22);
-                }
-                .producto-extra img {
-                    width: 100%;
-                    height: 300px;
-                    object-fit: contain;
-                }
-            </style>
-        </head>
-        <body>
-            <h1>Más productos Frituras Gody</h1>
-            <div class="productos-extra">
-                <article class="producto-extra">
-                    <img src="salsas.jpeg" alt="Salsas Frituras Gody">
-                    <h2>Salsas</h2>
-                    <p>El toque picosito ideal para tus frituras.</p>
-                </article>
-                <article class="producto-extra">
-                    <img src="cueros,patas,chetos.jpeg" alt="Cueros, Patas y Chetos">
-                    <h2>Cueros, Patas y Chetos</h2>
-                    <p>Una mezcla crujiente y llena de sabor.</p>
-                </article>
-            </div>
-        </body>
-        </html>
-    `);
-    nuevaPestana.document.close();
+    function cerrarConEscape(evento) {
+        if (evento.key === "Escape") {
+            cerrarImagen();
+        }
+    }
+
+    visor.addEventListener("click", (evento) => {
+        if (evento.target === visor) {
+            cerrarImagen();
+        }
+    });
+    document.addEventListener("keydown", cerrarConEscape);
 }
 
 document.querySelectorAll(".producto img").forEach((imagen) => {
-    imagen.addEventListener("click", abrirProductosAdicionales);
+    imagen.addEventListener("click", () => abrirImagen(imagen));
 });
 
 function verProductos() {

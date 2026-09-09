@@ -1,0 +1,9 @@
+{
+    "appId": "com.friturasgody.app",
+    "appName": "Frituras Gody",
+    "webDir": "www",
+    "bundledWebRuntime": false,
+    "server": {
+        "androidScheme": "https"
+    }
+}

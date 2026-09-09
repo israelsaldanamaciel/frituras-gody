@@ -30,6 +30,38 @@ main {
     z-index: 1;
 }
 
+#portadaCarga {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    background-color: #160606;
+    background-image:
+        radial-gradient(circle at 15% 20%, rgba(245, 189, 25, 0.9), transparent 24%),
+        radial-gradient(circle at 85% 80%, rgba(217, 40, 40, 0.9), transparent 28%),
+        linear-gradient(135deg, #190606 0%, #8f241d 45%, #f58a1f 72%, #190606 100%);
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 700ms ease, visibility 700ms ease;
+}
+
+#portadaCarga.oculta {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+#portadaCarga img {
+    width: 100vw;
+    height: 100vh;
+    object-fit: contain;
+    object-position: center;
+    will-change: transform;
+    animation: flotar 4.5s ease-in-out infinite;
+}
+
 @keyframes logosFlotando {
     from {
         transform: translate3d(-18px, -10px, 0) rotate(-6deg);
@@ -40,7 +72,8 @@ main {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    body::before {
+    body::before,
+    #portadaCarga img {
         animation: none;
     }
 }
@@ -72,13 +105,27 @@ header {
     padding: 25px;
 }
 
+.marca-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    flex-wrap: wrap;
+}
+
 .logo {
     width: min(450px, 90vw);
     max-height: 250px;
     object-fit: contain;
     display: block;
-    margin: 0 auto 12px;
+    margin: 0;
     border-radius: 16px;
+}
+
+@media (max-width: 600px) {
+    .marca-header {
+        flex-direction: column;
+    }
 }
 
 main {
@@ -93,6 +140,21 @@ button {
     border-radius: 10px;
     cursor: pointer;
 }
+
+#instalarApp {
+    color: #fff;
+    background: #b5161f;
+    box-shadow: 0 4px 0 #761019;
+}
+
+#instalarApp:hover {
+    background: #8f241d;
+}
+
+#instalarApp[hidden] {
+    display: none;
+}
+
 #productos {
     margin-top: 40px;
     display: grid;

@@ -1,0 +1,19 @@
+{
+    "name": "Frituras Gody",
+    "short_name": "Frituras Gody",
+    "description": "Catalogo y pedidos de Frituras Gody",
+    "start_url": "./index.html",
+    "scope": "./",
+    "display": "standalone",
+    "orientation": "portrait",
+    "background_color": "#fff4df",
+    "theme_color": "#d92828",
+    "icons": [
+        {
+            "src": "logo de frituras gody.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}
