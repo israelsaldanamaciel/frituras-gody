@@ -28,7 +28,7 @@ function actualizarCarrito() {
         const elemento = document.createElement("p");
 
         elemento.innerHTML = `
-            ${producto.nombre}
+            ${producto.nombre} - $${producto.precio}
             <button onclick="eliminarProducto(${index})">❌</button>
         `;
 
@@ -39,6 +39,7 @@ function actualizarCarrito() {
         lista.innerHTML = "<p>No has agregado productos todavía.</p>";
     }
 
+    document.getElementById("total").textContent = total;
 }
 
 function eliminarProducto(index) {
@@ -112,8 +113,10 @@ function hacerPedido() {
     let mensaje = "🛒 MI PEDIDO\n\n";
 
     pedido.forEach((producto, index) => {
-        mensaje += `${index + 1}. ${producto.nombre}\n`;
+        mensaje += `${index + 1}. ${producto.nombre} - $${producto.precio}\n`;
     });
+
+    mensaje += `\n💰 TOTAL: $${total}`;
 
     const enlaceMessenger = "https://m.me/61582641410669";
     copiarMensajeSincrono(mensaje);
