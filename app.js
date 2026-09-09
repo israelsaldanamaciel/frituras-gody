@@ -48,7 +48,7 @@ function actualizarCarrito() {
         const elemento = document.createElement("p");
 
         elemento.innerHTML = `
-            ${producto.nombre} - $${producto.precio}
+            ${producto.nombre}
             <button onclick="eliminarProducto(${index})">❌</button>
         `;
 
