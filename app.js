@@ -59,7 +59,6 @@ function actualizarCarrito() {
         lista.innerHTML = "<p>No has agregado productos todavía.</p>";
     }
 
-    document.getElementById("total").textContent = total;
 }
 
 function eliminarProducto(index) {
