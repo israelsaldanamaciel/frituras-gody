@@ -1,6 +1,26 @@
 let pedido = [];
 let total = 0;
 
+function abrirImagen(imagen) {
+    const visor = document.createElement("div");
+    const imagenGrande = document.createElement("img");
+
+    visor.className = "visor-imagen";
+    imagenGrande.src = imagen.src;
+    imagenGrande.alt = imagen.alt;
+    visor.appendChild(imagenGrande);
+
+    visor.addEventListener("click", () => {
+        visor.remove();
+    });
+
+    document.body.appendChild(visor);
+}
+
+document.querySelectorAll(".producto img").forEach((imagen) => {
+    imagen.addEventListener("click", () => abrirImagen(imagen));
+});
+
 function verProductos() {
     document.getElementById("productos").scrollIntoView({
         behavior: "smooth"
