@@ -33,8 +33,8 @@ h3 {
 }
 
 header {
-    background-color: #222;
-    color: white;
+    background: linear-gradient(135deg, #f5bd19 0%, #f58a1f 52%, #d92828 100%);
+    color: #171717;
     padding: 25px;
 }
 
